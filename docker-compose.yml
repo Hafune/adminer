@@ -3,7 +3,6 @@ version: "3"
 services:
   adminer:
     image: adminer
-    restart: always
     networks:
       - default
       - web
@@ -11,6 +10,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.${APP_NAME}-adminer.rule=Host(`${APP_DOMAIN}`)"
       - "traefik.http.routers.${APP_NAME}-adminer.priority=1000"
+    restart: unless-stopped
 
 networks:
   web:
