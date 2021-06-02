@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - default
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.${APP_NAME}-adminer.rule=Host(`${APP_DOMAIN}`)"
+      - "traefik.http.routers.${APP_NAME}-adminer.priority=1000"
+
+networks:
+  web:
+    external: true
